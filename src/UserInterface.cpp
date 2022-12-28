@@ -23,7 +23,7 @@ void UserInterface::loop() {
 }
 
 void UserInterface::setText(const char* text) {
-    currentText = text;
+    strcpy(currentText, text);
 
     updateDisplay();
 }
@@ -31,6 +31,7 @@ void UserInterface::setText(const char* text) {
 void UserInterface::buttonPressed() {
     //Run stuff for button press
     //Current state changes action
+    Serial.println("PResed");
     switch (PCBPrinter::this_PCBPrinter->state)
     {
     case 0:

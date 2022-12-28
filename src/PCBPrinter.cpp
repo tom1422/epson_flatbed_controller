@@ -2,9 +2,12 @@
 
 PCBPrinter* PCBPrinter::this_PCBPrinter;
 
+
 PrinterPositionManager PCBPrinter::ppm;
 UserInterface PCBPrinter::uim;
 StepperManager PCBPrinter::sm;
+
+static unsigned long pcbBtnPressed = 0;
 
 PCBPrinter::PCBPrinter() {
     this_PCBPrinter = this;
@@ -18,8 +21,15 @@ void PCBPrinter::setup() {
     switchState(1);
     sm.setup();
 
+    Serial.begin(9600);
+
+    pinMode(PAPER_SENS_OUT, OUTPUT);
+    digitalWrite(PAPER_SENS_OUT, HIGH);
+
     attachInterrupt(digitalPinToInterrupt(OPTENCP1), int_OPT_ENCP1, RISING);
     attachInterrupt(digitalPinToInterrupt(USR_BTN), int_USR_BTN, RISING);
+
+    Serial.println("CUM???");
 }
 
 void PCBPrinter::loop() {
@@ -42,7 +52,9 @@ void PCBPrinter::switchState(int newState) {
         //Enter idle state
         //Probably means it's finished homing, printing and ready to print.
 
-        uim.setText("Ready! (idle/0)");
+        uim.setText("Ready! (idle/0) ");
+        //Make printer think no paper is inserted
+        digitalWrite(PAPER_SENS_OUT, HIGH);
         //Re-init PPM Class
         ppm = PrinterPositionManager();
         //Set to idle position (END)
@@ -52,13 +64,14 @@ void PCBPrinter::switchState(int newState) {
     case 1:
         //Enter busy state
 
-        uim.setText("Busy! (1)");
+        uim.setText("Busy! (1)       ");
 
         break;
     case 2:
         //Print about to start state
 
         uim.setText("Wait to start(2)");
+        digitalWrite(PAPER_SENS_OUT, LOW);
         sm.printing_home();
         ppm.printStarted();
 
@@ -66,7 +79,7 @@ void PCBPrinter::switchState(int newState) {
     case 3:
         //Printing state (Listening to printer position data)
         
-        uim.setText("Printing! (3)");
+        uim.setText("Printing! (3)   ");
 
         break;
     default:
@@ -79,5 +92,8 @@ void PCBPrinter::int_OPT_ENCP1() {
 }
 
 void PCBPrinter::int_USR_BTN() {
-    uim.buttonPressed();
+    if (millis() > (pcbBtnPressed + 150)) {
+        pcbBtnPressed = millis();
+        uim.buttonPressed();
+    }
 }

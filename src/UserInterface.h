@@ -22,7 +22,7 @@ class UserInterface {
     LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x3F, 16, 2);
     unsigned long lastDisplayUpdate = 0;
 
-    String currentText;
+    char currentText[25];
 
     void updateDisplay();
 };

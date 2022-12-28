@@ -1,8 +1,12 @@
 #pragma once
 #include <Arduino.h>
+#include <SPI.h>
+#include <SoftwareSerial.h>
 #include "PrinterPositionManager.h"
 #include "UserInterface.h"
 #include "StepperManager.h"
+
+#define PAPER_SENS_OUT 22
 
 class PCBPrinter {
     public:
@@ -27,5 +31,7 @@ class PCBPrinter {
         static void int_OPT_ENCP1();
 
         static void int_USR_BTN();
+        static bool debounceUsrBtn();
+
 
 };
