@@ -23,7 +23,7 @@ class UserInterface {
 
   private:
 
-    LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x3F, 16, 2);
+    LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x3F);
     unsigned long lastDisplayUpdate = 0;
 
     char currentText[25];

@@ -5,7 +5,7 @@ void UserInterface::setup() {
     Serial.begin(115200);
     Serial.setTimeout(30);
 
-    lcd.init();
+    lcd.begin(16, 2);
     lcd.backlight();
     lcd.setCursor(0, 0);
     lcd.print("Welcome to PCB");
