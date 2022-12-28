@@ -63,6 +63,7 @@ void UserInterface::buttonPressed() {
 
 
 void UserInterface::updateDisplay() {
+    lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("PCB Cnt V1.0");
     lcd.setCursor(0, 1);
