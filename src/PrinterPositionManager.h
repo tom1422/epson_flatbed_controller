@@ -4,32 +4,32 @@
 #define OPTENCP2 19
 
 class PrinterPositionManager {
-  public:
-    void setup();
+	public:
+		void setup();
 
-    void loop();
+		void loop();
 
-    void p1Rising();
+		void p1Rising();
 
-    void printStarted();
+		void printStarted();
 
-    float getPaperPosition();
+		float getPaperPosition();
 
-  private:
-    int counts = 0;
-    int totalCounts = 0;
+	private:
+		int counts = 0;
+		int totalCounts = 0;
 
-    unsigned long lastAlgoUpdate = 0;
+		unsigned long lastAlgoUpdate = 0;
 
-    //Print start sense algorithm
-    bool initialLeapOver = false;
-    bool secondLeapNegative = false;
-    bool secondLeapPositive = false;
-    bool thirdLeapNegative = false;
-    bool thirdLeapPositive = false;
+		//Print start sense algorithm
+		bool initialLeapOver = false;
+		bool secondLeapNegative = false;
+		bool secondLeapPositive = false;
+		bool thirdLeapNegative = false;
+		bool thirdLeapPositive = false;
 
-    //Current State Variables
-    bool printStartRequested = false;
+		//Current State Variables
+		bool printStartRequested = false;
 
-    void monitorPatterns();
+		void monitorPatterns();
 };

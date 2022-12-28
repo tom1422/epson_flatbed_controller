@@ -13,13 +13,13 @@ void PrinterPositionManager::loop() {
 void PrinterPositionManager::p1Rising() {
     int p2 = digitalRead(OPTENCP2);
     if (p2 == HIGH) {
-    //Both are high, P2 is leading (clockwise)
-    counts += 1;
-    totalCounts += 1;
+        //Both are high, P2 is leading (clockwise)
+        counts += 1;
+        totalCounts += 1;
     } else {
-    //P1 is leading (anticlockwise)
-    counts -= 1;
-    totalCounts -= 1;
+        //P1 is leading (anticlockwise)
+        counts -= 1;
+        totalCounts -= 1;
     }
 }
 

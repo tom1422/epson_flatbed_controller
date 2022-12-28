@@ -7,8 +7,6 @@ PrinterPositionManager PCBPrinter::ppm;
 UserInterface PCBPrinter::uim;
 StepperManager PCBPrinter::sm;
 
-static unsigned long pcbBtnPressed = 0;
-
 PCBPrinter::PCBPrinter() {
     this_PCBPrinter = this;
 }
@@ -28,8 +26,6 @@ void PCBPrinter::setup() {
 
     attachInterrupt(digitalPinToInterrupt(OPTENCP1), int_OPT_ENCP1, RISING);
     attachInterrupt(digitalPinToInterrupt(USR_BTN), int_USR_BTN, RISING);
-
-    Serial.println("CUM???");
 }
 
 void PCBPrinter::loop() {
@@ -92,8 +88,5 @@ void PCBPrinter::int_OPT_ENCP1() {
 }
 
 void PCBPrinter::int_USR_BTN() {
-    if (millis() > (pcbBtnPressed + 150)) {
-        pcbBtnPressed = millis();
-        uim.buttonPressed();
-    }
+    uim.buttonPressedInterrupt();
 }

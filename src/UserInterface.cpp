@@ -20,6 +20,15 @@ void UserInterface::loop() {
          lastDisplayUpdate = millis();
          updateDisplay();
     } */
+
+    //Check for button presses (Avoid using an interrupt!)
+    if (usrBtnPressed) {
+        if (millis() > (lastUsrBtnPressed + 200)) {
+            lastUsrBtnPressed = millis();
+            this->buttonPressed();
+        }
+    }    
+    usrBtnPressed = false;
 }
 
 void UserInterface::setText(const char* text) {
@@ -28,10 +37,15 @@ void UserInterface::setText(const char* text) {
     updateDisplay();
 }
 
+
+void UserInterface::buttonPressedInterrupt() {
+    usrBtnPressed = true;
+}
+
 void UserInterface::buttonPressed() {
     //Run stuff for button press
     //Current state changes action
-    Serial.println("PResed");
+    Serial.println("Button Pressed!");
     switch (PCBPrinter::this_PCBPrinter->state)
     {
     case 0:

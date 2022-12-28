@@ -6,13 +6,13 @@
 #define A4988
 //#define TMC2208
 #ifdef A4988
-  #define EN_PIN 49
-  #define MS1_PIN 31
-  #define MS2_PIN 32
-  #define MS3_PIN 33
+	#define EN_PIN 49
+	#define MS1_PIN 31
+	#define MS2_PIN 32
+	#define MS3_PIN 33
 #endif
 #ifdef TMC2208
-  #define UART_PIN -1
+	#define UART_PIN -1
 #endif
 //---------Step and Direction Pins---------
 #define STEP_PIN 8
@@ -27,26 +27,26 @@
 
 
 class StepperManager {
-  public:
-    void setup();
+public:
+	void setup();
 
-    void loop();
+	void loop();
 
-    void setTarget(float newPos);
+	void setTarget(float newPos);
 
-    void incrementPosition(float amount);
+	void incrementPosition(float amount);
 
-    void printing_home();
+	void printing_home();
 
-    void printing_setTarget(float newOffsetPos);
+	void printing_setTarget(float newOffsetPos);
 
-  private:
-    FastAccelStepperEngine engine = FastAccelStepperEngine();
-    FastAccelStepper *stepper = NULL;
+private:
+	FastAccelStepperEngine engine = FastAccelStepperEngine();
+	FastAccelStepper *stepper = NULL;
 
-    bool homing = true;
-    float lastPosition = 0;
+	bool homing = true;
+	float lastPosition = 0;
 
-    
-    void homeStepper();
+	
+	void homeStepper();
 };

@@ -6,6 +6,8 @@
 #define I2C_SCL 21
 //---------USER---------
 #define USR_BTN 3
+//Enble or disable this for serial logging
+#define serialLog
 
 class UserInterface {
   public:
@@ -17,6 +19,8 @@ class UserInterface {
 
     void buttonPressed();
 
+    void buttonPressedInterrupt();
+
   private:
 
     LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x3F, 16, 2);
@@ -25,4 +29,8 @@ class UserInterface {
     char currentText[25];
 
     void updateDisplay();
+
+    //Debouce stuff
+    unsigned long lastUsrBtnPressed = 0;
+    bool usrBtnPressed = false;
 };
