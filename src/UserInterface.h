@@ -1,6 +1,7 @@
 #pragma once
-#include <LiquidCrystal_I2C.h>
-
+#include <Wire.h>
+#include <hd44780.h>                       // main hd44780 header
+#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 //---------Screen---------
 #define I2C_SDA 20
 #define I2C_SCL 21
@@ -23,7 +24,8 @@ class UserInterface {
 
   private:
 
-    LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x3F);
+    hd44780_I2Cexp lcd = hd44780_I2Cexp(0x3F, 16, 2);
+
     unsigned long lastDisplayUpdate = 0;
 
     char currentText[25];
