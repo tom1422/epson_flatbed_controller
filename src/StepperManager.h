@@ -23,7 +23,7 @@
 #define MICROSTEP_RATIO 16.0
 #define STEPS_PER_MM (6.25 * MICROSTEP_RATIO)
 #define ENDBOUND_MM 220
-#define PRINT_START_POS_MM 60
+#define PRINT_START_POS_MM 35
 
 
 class StepperManager {
