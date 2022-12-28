@@ -2,6 +2,8 @@
 #include "PCBPrinter.h"
 
 void UserInterface::setup() {
+    //Switch to: https://github.com/duinoWitchery/hd44780
+
     Serial.begin(115200);
     Serial.setTimeout(30);
 
